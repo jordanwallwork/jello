@@ -22,12 +22,6 @@ namespace Jello.Nodes
         {
             Jello = jello;
             Lexer = lexer;
-            return Parse();
-        }
-
-        public T Parse()
-        {
-            if (Lexer == null) throw new Exception("No lexer");
             return ParseNode();
         }
 
@@ -44,7 +38,7 @@ namespace Jello.Nodes
             var nextTok = Lexer.Next();
             if (nextTok.Type != type)
             {
-                Errors.Add(new ParseError("Expected " + type));
+                Errors.Add(new ParseError("Expected " + type, nextTok.LineNo, nextTok.Col));
                 value = null;
                 return false;
             }
@@ -58,7 +52,7 @@ namespace Jello.Nodes
             var _node = Activator.CreateInstance<T>().Parse(Jello, Lexer);
             if (_node.Errors.Any())
             {
-                Errors = _node.Errors;
+                Errors.AddRange(_node.Errors);
                 node = null;
                 Lexer.ResetPos(currPos);
                 return false;
@@ -82,6 +76,20 @@ namespace Jello.Nodes
                 return false;
             }
             value = nextTok.Value;
+            return true;
+        }
+
+        public bool AcceptNode<T>(out T node) where T : Node<T>
+        {
+            var currPos = Lexer.Pos;
+            var _node = Activator.CreateInstance<T>().Parse(Jello, Lexer);
+            if (_node.Errors.Any())
+            {
+                node = null;
+                Lexer.ResetPos(currPos);
+                return false;
+            }
+            node = _node;
             return true;
         }
     }

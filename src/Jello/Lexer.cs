@@ -8,22 +8,27 @@ namespace Jello
 {
     public class Lexer
     {
-        private int _currLine = 1;
         private int _currTok { get; set; }
         private readonly List<Token> _tokens = new List<Token>();
         private readonly Stack<Token> _brackets = new Stack<Token>();
 
         public List<LexError> Errors = new List<LexError>();
         public int Pos { get { return _currTok; } }
+        public int LineNo  { get; private set; }
+        public int Col  { get; private set; }
 
         public Lexer(string input)
         {
+            LineNo = 1;
+            Col = 1;
             Lex(new StringReader(input));
         }
 
         public void ResetPos(int pos)
         {
             _currTok = pos;
+            LineNo = _tokens[pos].LineNo;
+            Col = _tokens[pos].Col;
         }
 
         public void Lex(TextReader input)
@@ -35,12 +40,16 @@ namespace Jello
                     var ch = (char) input.Read();
                     if (ch == '\n')
                     {
-                        _currLine++;
+                        LineNo++;
+                        Col = 1;
                         continue;
                     }
-                    if (char.IsWhiteSpace(ch)) continue;
-                    var tok = GetToken(input, ch);
-                    if (tok != null) _tokens.Add(tok);
+                    if (!char.IsWhiteSpace(ch))
+                    {
+                        var tok = GetToken(input, ch);
+                        if (tok != null) _tokens.Add(tok);
+                    }
+                    Col++;
                 }
                 EOF();
             }
@@ -61,7 +70,7 @@ namespace Jello
 
         private Token CreateToken(string type, object value = null)
         {
-            return new Token(type, value) { LineNo = _currLine };
+            return new Token(type, value) { LineNo = LineNo, Col = Col };
         }
 
         private Token CreateToken(char type, object value = null)

@@ -10,7 +10,7 @@ namespace Jello.Nodes
         protected override Expression ParseNode()
         {
             Term term;
-            if (ExpectNode(out term))
+            if (AcceptNode(out term))
             {
                 Term = term;
                 return this;
@@ -21,9 +21,9 @@ namespace Jello.Nodes
                 Expression expression;
                 if (ExpectNode(out expression)) Expr = expression;
                 if (ExpectToken(")")) return this;
-                Errors.Add(new ParseError("Expected Terminal"));
             }
 
+            Errors.Add(new ParseError("Expected '(' or expression", Lexer.LineNo, Lexer.Col));
             return this;
         }
     }
