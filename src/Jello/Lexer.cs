@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Text;
 
 namespace Jello
@@ -10,15 +9,21 @@ namespace Jello
     public class Lexer
     {
         private int _currLine = 1;
-        private int _currTok;
+        private int _currTok { get; set; }
         private readonly List<Token> _tokens = new List<Token>();
-        private readonly Stack<Token> _brackets = new Stack<Token>(); 
+        private readonly Stack<Token> _brackets = new Stack<Token>();
 
-        public List<LexError> Errors = new List<LexError>(); 
+        public List<LexError> Errors = new List<LexError>();
+        public int Pos { get { return _currTok; } }
 
         public Lexer(string input)
         {
             Lex(new StringReader(input));
+        }
+
+        public void ResetPos(int pos)
+        {
+            _currTok = pos;
         }
 
         public void Lex(TextReader input)

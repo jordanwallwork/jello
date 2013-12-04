@@ -1,4 +1,6 @@
-﻿namespace Jello
+﻿using Jello.Nodes;
+
+namespace Jello
 {
     public class LexError
     {
