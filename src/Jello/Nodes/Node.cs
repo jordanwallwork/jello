@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Jello.Nodes
 {
-    public abstract class Node<T>
+    public abstract class Node<T> where T : class
     {
         protected Jello Jello;
         protected Lexer Lexer;
@@ -91,6 +91,12 @@ namespace Jello.Nodes
             }
             node = _node;
             return true;
+        }
+
+        public T NoMatches(params string[] expected)
+        {
+            Errors.Add(new ParseError("Expected " + expected.ToReadableOrList(), Lexer.LineNo, Lexer.Col));
+            return this as T;
         }
     }
 }

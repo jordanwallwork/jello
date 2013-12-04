@@ -23,8 +23,7 @@ namespace Jello.Nodes
                 if (ExpectToken(")")) return this;
             }
 
-            Errors.Add(new ParseError("Expected '(' or expression", Lexer.LineNo, Lexer.Col));
-            return this;
+            return NoMatches("'('", "expression");
         }
     }
 }
