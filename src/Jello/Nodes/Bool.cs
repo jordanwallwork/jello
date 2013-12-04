@@ -1,5 +1,3 @@
-using System;
-
 namespace Jello.Nodes
 {
     public class Bool : Node<Bool>
@@ -8,10 +6,10 @@ namespace Jello.Nodes
 
         protected override Bool ParseNode()
         {
-            Token token;
-            if (Expect("bool", out token))
+            object boolVal;
+            if (ExpectToken("bool", out boolVal))
             {
-                Value = (bool)token.Value;
+                Value = (bool)boolVal;
             }
             return this;
         }

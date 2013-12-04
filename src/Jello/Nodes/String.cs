@@ -6,10 +6,10 @@ namespace Jello.Nodes
 
         protected override String ParseNode()
         {
-            Token token;
-            if (Expect("string", out token))
+            object strVal;
+            if (ExpectToken("string", out strVal))
             {
-                Value = (string)token.Value;
+                Value = (string)strVal;
             }
             return this;
         }

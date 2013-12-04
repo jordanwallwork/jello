@@ -9,7 +9,7 @@ namespace Jello.Nodes
         protected Jello Jello;
         protected Lexer Lexer;
 
-        protected List<ParseError> Errors = new List<ParseError>(); 
+        public List<ParseError> Errors = new List<ParseError>(); 
 
         protected Node() {}
         protected Node(Jello jello, Lexer lexer)
@@ -33,20 +33,26 @@ namespace Jello.Nodes
 
         protected abstract T ParseNode();
 
-        public bool Expect(string type, out Token token)
+        public bool ExpectToken(string type)
+        {
+            object discardVal;
+            return ExpectToken(type, out discardVal);
+        }
+
+        public bool ExpectToken(string type, out object value)
         {
             var nextTok = Lexer.Next();
             if (nextTok.Type != type)
             {
-                Errors.Add(new ParseError() { Message = "Expected " + type});
-                token = null;
+                Errors.Add(new ParseError("Expected " + type));
+                value = null;
                 return false;
             }
-            token = nextTok;
+            value = nextTok.Value;
             return true;
         }
 
-        public bool Expect<T>(out T node) where T : Node<T>
+        public bool ExpectNode<T>(out T node) where T : Node<T>
         {
             var currPos = Lexer.Pos;
             var _node = Activator.CreateInstance<T>().Parse(Jello, Lexer);
@@ -58,6 +64,24 @@ namespace Jello.Nodes
                 return false;
             }
             node = _node;
+            return true;
+        }
+
+        public bool AcceptToken(string type)
+        {
+            object discardVal;
+            return AcceptToken(type, out discardVal);
+        }
+
+        public bool AcceptToken(string type, out object value)
+        {
+            var nextTok = Lexer.Next();
+            if (nextTok.Type != type)
+            {
+                value = null;
+                return false;
+            }
+            value = nextTok.Value;
             return true;
         }
     }

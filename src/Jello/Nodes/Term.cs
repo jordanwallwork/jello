@@ -8,20 +8,20 @@ namespace Jello.Nodes
         protected override Term ParseNode()
         {
             Bool boolNode;
-            if (Expect(out boolNode))
+            if (ExpectNode(out boolNode))
             {
                 Bool = boolNode;
                 return this;
             }
 
             String stringNode;
-            if (Expect(out stringNode))
+            if (ExpectNode(out stringNode))
             {
                 String = stringNode;
                 return this;
             }
 
-            return null;
+            return this;
         }
     }
 }

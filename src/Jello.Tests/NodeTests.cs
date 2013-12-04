@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Jello.Tests
 {
     [TestFixture]
-    public class NodeTests
+    public class TerminalNodeTests
     {
         [Test]
         public void ShouldResolveBool()
