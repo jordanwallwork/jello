@@ -67,15 +67,17 @@ namespace Jello.Nodes
             return AcceptToken(type, out discardVal);
         }
 
-        public bool AcceptToken(string type, out object value)
+        public bool AcceptToken(string type, out object valueOrType)
         {
+            var currPos = Lexer.Pos;
             var nextTok = Lexer.Next();
             if (nextTok.Type != type)
             {
-                value = null;
+                valueOrType = null;
+                Lexer.ResetPos(currPos);
                 return false;
             }
-            value = nextTok.Value;
+            valueOrType = nextTok.Value ?? nextTok.Type;
             return true;
         }
 

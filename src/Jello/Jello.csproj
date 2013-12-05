@@ -43,9 +43,16 @@
     <Compile Include="Jello.cs" />
     <Compile Include="Lexer.cs" />
     <Compile Include="LexError.cs" />
+    <Compile Include="Nodes\AdditiveExpression.cs" />
     <Compile Include="Nodes\Bool.cs" />
+    <Compile Include="Nodes\ConditionalExpression.cs" />
     <Compile Include="Nodes\Expression.cs" />
+    <Compile Include="Nodes\LogicalAndExpression.cs" />
+    <Compile Include="Nodes\LogicalOrExpression.cs" />
+    <Compile Include="Nodes\ArithmeticExpression.cs" />
+    <Compile Include="Nodes\PrimaryExpression.cs" />
     <Compile Include="Nodes\Node.cs" />
+    <Compile Include="Nodes\BooleanExpression.cs" />
     <Compile Include="Nodes\String.cs" />
     <Compile Include="Nodes\Term.cs" />
     <Compile Include="ParseError.cs" />

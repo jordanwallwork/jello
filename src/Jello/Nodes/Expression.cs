@@ -1,29 +1,18 @@
-using System.Runtime.InteropServices;
-
 namespace Jello.Nodes
 {
     public class Expression : Node<Expression>
     {
-        public Term Term { get; set; }
-        public Expression Expr { get; set; }
+        public ConditionalExpression Conditional { get; set; }
 
         protected override Expression ParseNode()
         {
-            Term term;
-            if (AcceptNode(out term))
+            ConditionalExpression expr;
+            if (ExpectNode(out expr))
             {
-                Term = term;
+                Conditional = expr;
                 return this;
             }
-
-            if (AcceptToken("("))
-            {
-                Expression expression;
-                if (ExpectNode(out expression)) Expr = expression;
-                if (ExpectToken(")")) return this;
-            }
-
-            return NoMatches("'('", "expression");
+            return this;
         }
     }
 }
