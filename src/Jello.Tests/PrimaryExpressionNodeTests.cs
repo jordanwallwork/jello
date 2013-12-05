@@ -22,7 +22,6 @@ namespace Jello.Tests
         }
 
         [Test]
-        [Ignore("Circular reference trying to resolve Expression causes stack overflow. Think the issue lies between Expression - BooleanExpression (inclusive)")]
         public void ShouldShowUsefulErrorInformation()
         {
             var expr = new Jello().Parse<PrimaryExpression>("()");

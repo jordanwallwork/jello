@@ -2,36 +2,27 @@ namespace Jello.Nodes
 {
     public class BooleanExpression : Node<BooleanExpression>
     {
-        public BooleanExpression Boolean { get; set; }
-        public string BooleanOperator { get; set; }
         public AdditiveExpression ArithmeticExpression { get; set; }
+        public string BooleanOperator { get; set; }
+        public BooleanExpression Boolean { get; set; }
 
         protected override BooleanExpression ParseNode()
         {
             AdditiveExpression arithExpr;
-            if (AcceptNode(out arithExpr))
+            if (ExpectNode(out arithExpr))
             {
                 ArithmeticExpression = arithExpr;
-                return this;
-            }
 
-            BooleanExpression relExpr;
-            if (ExpectNode(out relExpr))
-            {
                 object op;
-                if (AcceptToken("==", out op) || AcceptToken("!=", out op))
-                {
-                    if (ExpectNode(out arithExpr))
-                    {
-                        ArithmeticExpression = arithExpr;
-                    }
-                }
-                if (AcceptToken("<", out op) || AcceptToken("<=", out op) ||
+                if (AcceptToken("==", out op) || AcceptToken("!=", out op) ||
+                    AcceptToken("<", out op) || AcceptToken("<=", out op) ||
                     AcceptToken(">", out op) || AcceptToken(">=", out op))
                 {
-                    if (ExpectNode(out arithExpr))
+                    BooleanOperator = op.ToString();
+                    BooleanExpression boolExpr;
+                    if (ExpectNode(out boolExpr))
                     {
-                        ArithmeticExpression = arithExpr;
+                        Boolean = boolExpr;
                     }
                 }
             }

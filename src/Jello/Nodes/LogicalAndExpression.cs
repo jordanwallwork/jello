@@ -9,31 +9,19 @@ namespace Jello.Nodes
         protected override LogicalAndExpression ParseNode()
         {
             BooleanExpression boolExpr;
-            if (AcceptNode(out boolExpr))
+            if (ExpectNode(out boolExpr))
             {
                 BooleanExpression = boolExpr;
-                return this;
-            }
-
-            LogicalAndExpression expr;
-            if (ExpectNode(out expr))
-            {
-                LogicalAnd = expr;
 
                 if (AcceptToken("&&"))
                 {
                     Operator = "&&";
-                    if (ExpectNode(out boolExpr))
+                    LogicalAndExpression andExpr;
+                    if (ExpectNode(out andExpr))
                     {
-                        BooleanExpression = boolExpr;
-                    }
-                    else
-                    {
-                        return NoMatches("equality_expression");
+                        LogicalAnd = andExpr;
                     }
                 }
-
-                return this;
             }
             return this;
         }
