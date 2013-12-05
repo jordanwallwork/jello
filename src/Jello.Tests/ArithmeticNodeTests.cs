@@ -46,9 +46,9 @@ namespace Jello.Tests
         public void ShouldResolveBasicAdditiveExpression_Minus()
         {
             var additiveExpr = new Jello().Parse<AdditiveExpression>("6 - 1");
-            Assert.AreEqual(2, additiveExpr.LHS.LHS.Term.Number.Value);
+            Assert.AreEqual(6, additiveExpr.LHS.LHS.Term.Number.Value);
             Assert.AreEqual("-", additiveExpr.Operator);
-            Assert.AreEqual(4, additiveExpr.RHS.LHS.LHS.Term.Number.Value);
+            Assert.AreEqual(1, additiveExpr.RHS.LHS.LHS.Term.Number.Value);
         }
 
         [Test]

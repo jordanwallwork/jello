@@ -5,6 +5,7 @@ namespace Jello.Nodes
         public Bool Bool { get; set; }
         public String String { get; set; }
         public Number Number { get; set; }
+        public Date Date { get; set; }
 
         protected override Term ParseNode()
         {
@@ -29,7 +30,14 @@ namespace Jello.Nodes
                 return this;
             }
 
-            return NoMatches("bool", "string");
+            Date dateNode;
+            if (AcceptNode(out dateNode))
+            {
+                Date = dateNode;
+                return this;
+            }
+
+            return NoMatches("bool", "string", "number", "date");
         }
     }
 }

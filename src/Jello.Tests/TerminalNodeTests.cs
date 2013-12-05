@@ -1,5 +1,7 @@
-﻿using Jello.Nodes;
+﻿using System;
+using Jello.Nodes;
 using NUnit.Framework;
+using String = Jello.Nodes.String;
 
 namespace Jello.Tests
 {
@@ -46,13 +48,21 @@ namespace Jello.Tests
         }
 
         [Test]
+        public void ShouldResolveDateTerm()
+        {
+            var d = new Jello().Parse<Term>("'1989-09-29'");
+            Assert.IsNotNull(d.Date);
+            Assert.AreEqual(new DateTime(1989, 09, 29), d.Date.Value);
+        }
+
+        [Test]
         public void ShouldShowUsefulErrorInformation()
         {
             var expr = new Jello().Parse<Term>("");
             var error = expr.Errors[0];
             Assert.AreEqual(1, error.LineNo);
             Assert.AreEqual(1, error.Col);
-            Assert.AreEqual("Expected bool or string", error.Message);
+            Assert.AreEqual("Expected bool, string, number or date", error.Message);
         }
     }
 }

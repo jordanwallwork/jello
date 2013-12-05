@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using Jello.Errors;
+using Jello.Utils;
 
 namespace Jello
 {
@@ -64,6 +67,7 @@ namespace Jello
             if (ch == ')' || ch == ']') return CloseBrackets(ch);
 
             if (ch == '\"') return StringToken(input);
+            if (ch == '\'') return DateToken(input);
 
             return GetKeywordOrIdentifier(input, ch);
         }
@@ -84,6 +88,25 @@ namespace Jello
             if (next != '=') return CreateToken(ch);
             input.Read();
             return CreateToken(ch + "=");
+        }
+
+        private Token DateToken(TextReader input)
+        {
+            var token = CreateToken("date");
+            var stringBuilder = new StringBuilder();
+            while (input.Peek() != -1)
+            {
+                var _ch = (char)input.Read();
+                if (_ch == '\'')
+                {
+                    token.Value = stringBuilder.ToString();
+                    return token;
+                }
+                stringBuilder.Append(_ch);
+            }
+            Errors.Add(new LexError { Token = token, Message = "String not closed - Unexpected end of file" });
+            token.Value = stringBuilder.ToString();
+            return token;
         }
 
         private Token StringToken(TextReader input)
