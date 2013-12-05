@@ -50,6 +50,7 @@
     <Compile Include="Nodes\LogicalAndExpression.cs" />
     <Compile Include="Nodes\LogicalOrExpression.cs" />
     <Compile Include="Nodes\ArithmeticExpression.cs" />
+    <Compile Include="Nodes\Number.cs" />
     <Compile Include="Nodes\PrimaryExpression.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\BooleanExpression.cs" />

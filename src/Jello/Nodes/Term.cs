@@ -4,6 +4,7 @@ namespace Jello.Nodes
     {
         public Bool Bool { get; set; }
         public String String { get; set; }
+        public Number Number { get; set; }
 
         protected override Term ParseNode()
         {
@@ -18,6 +19,13 @@ namespace Jello.Nodes
             if (AcceptNode(out stringNode))
             {
                 String = stringNode;
+                return this;
+            }
+
+            Number numberNode;
+            if (AcceptNode(out numberNode))
+            {
+                Number = numberNode;
                 return this;
             }
 

@@ -21,6 +21,13 @@ namespace Jello.Tests
         }
 
         [Test]
+        public void ShouldResolveInt()
+        {
+            var i = new Jello().Parse<Number>("1.23");
+            Assert.AreEqual(1.23, i.Value);
+        }
+
+        [Test]
         public void ShouldResolveBoolTerm()
         {
             var b = new Jello().Parse<Term>("true");
