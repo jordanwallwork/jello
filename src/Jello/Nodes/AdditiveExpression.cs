@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Jello.Nodes
 {
     public class AdditiveExpression : Node<AdditiveExpression>
@@ -8,22 +10,12 @@ namespace Jello.Nodes
 
         protected override AdditiveExpression ParseNode()
         {
-            MultiplicativeExpression lhs;
-            if (ExpectNode(out lhs))
+            LHS = ExpectNode<MultiplicativeExpression>();
+            object op;
+            if (AcceptToken("+", out op) || AcceptToken("-", out op))
             {
-                LHS = lhs;
-                object op;
-                if (AcceptToken("+", out op) || AcceptToken("-", out op))
-                {
-                    Operator = op.ToString();
-
-                    AdditiveExpression rhs;
-                    if (ExpectNode(out rhs))
-                    {
-                        RHS = rhs;
-                        return this;
-                    }
-                }
+                Operator = op.ToString();
+                RHS = ExpectNode<AdditiveExpression>();
             }
             return this;
         }

@@ -6,12 +6,7 @@ namespace Jello.Nodes
 
         protected override ConditionalExpression ParseNode()
         {
-            LogicalOrExpression expr;
-            if (ExpectNode(out expr))
-            {
-                LHS = expr;
-                return this;
-            }
+            LHS = ExpectNode<LogicalOrExpression>();
             return this;
         }
     }

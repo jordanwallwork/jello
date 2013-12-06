@@ -8,23 +8,15 @@ namespace Jello.Nodes
 
         protected override BooleanExpression ParseNode()
         {
-            AdditiveExpression arithExpr;
-            if (ExpectNode(out arithExpr))
-            {
-                LHS = arithExpr;
+            LHS = ExpectNode<AdditiveExpression>();
 
-                object op;
-                if (AcceptToken("==", out op) || AcceptToken("!=", out op) ||
-                    AcceptToken("<", out op) || AcceptToken("<=", out op) ||
-                    AcceptToken(">", out op) || AcceptToken(">=", out op))
-                {
-                    BooleanOperator = op.ToString();
-                    BooleanExpression boolExpr;
-                    if (ExpectNode(out boolExpr))
-                    {
-                        RHS = boolExpr;
-                    }
-                }
+            object op;
+            if (AcceptToken("==", out op) || AcceptToken("!=", out op) ||
+                AcceptToken("<", out op) || AcceptToken("<=", out op) ||
+                AcceptToken(">", out op) || AcceptToken(">=", out op))
+            {
+                BooleanOperator = op.ToString();
+                RHS = ExpectNode<BooleanExpression>();
             }
             return this;
         }

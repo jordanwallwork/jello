@@ -69,7 +69,7 @@ namespace Jello.Tests
         {
             var additiveExpr = new Jello().Parse<MultiplicativeExpression>("(1 / 2) * 3");
 
-            var bracketedExpr = additiveExpr.LHS.Expr.Conditional.LHS.LHS.LHS.LHS;
+            var bracketedExpr = additiveExpr.LHS.Expr.LHS.LHS.LHS.LHS.LHS;
             Assert.AreEqual(1, bracketedExpr.LHS.LHS.Term.Number.Value);
             Assert.AreEqual("/", bracketedExpr.LHS.Operator);
             Assert.AreEqual(2, bracketedExpr.LHS.RHS.LHS.Term.Number.Value);

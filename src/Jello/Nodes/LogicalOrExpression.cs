@@ -8,21 +8,11 @@ namespace Jello.Nodes
 
         protected override LogicalOrExpression ParseNode()
         {
-            LogicalAndExpression andExpr;
-            if (ExpectNode(out andExpr))
+            LHS = ExpectNode<LogicalAndExpression>();
+            if (AcceptToken("||"))
             {
-                LHS = andExpr;
-
-                if (AcceptToken("||"))
-                {
-                    Operator = "||";
-                    LogicalOrExpression orExpr;
-                    if (ExpectNode(out orExpr))
-                    {
-                        RHS = orExpr;
-                    }
-                }
-
+                Operator = "||";
+                RHS = ExpectNode<LogicalOrExpression>();
             }
             return this;
         }

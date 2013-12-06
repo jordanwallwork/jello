@@ -48,19 +48,17 @@ namespace Jello.Nodes
             return true;
         }
 
-        public bool ExpectNode<T>(out T node) where T : Node<T>
+        public T ExpectNode<T>() where T : Node<T>
         {
             var currPos = Lexer.Pos;
             var _node = Activator.CreateInstance<T>().Parse(Jello, Lexer);
             if (_node.Errors.Any())
             {
                 Errors.AddRange(_node.Errors);
-                node = null;
                 Lexer.ResetPos(currPos);
-                return false;
+                return null;
             }
-            node = _node;
-            return true;
+            return _node;
         }
 
         public bool AcceptToken(string type)

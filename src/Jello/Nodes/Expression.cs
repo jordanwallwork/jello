@@ -2,16 +2,11 @@ namespace Jello.Nodes
 {
     public class Expression : Node<Expression>
     {
-        public ConditionalExpression Conditional { get; set; }
+        public ConditionalExpression LHS { get; set; }
 
         protected override Expression ParseNode()
         {
-            ConditionalExpression expr;
-            if (ExpectNode(out expr))
-            {
-                Conditional = expr;
-                return this;
-            }
+            LHS = ExpectNode<ConditionalExpression>();
             return this;
         }
     }

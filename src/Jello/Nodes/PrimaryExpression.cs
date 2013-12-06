@@ -18,9 +18,9 @@ namespace Jello.Nodes
 
             if (AcceptToken("("))
             {
-                Expression primaryExpression;
-                if (ExpectNode(out primaryExpression)) Expr = primaryExpression;
-                if (ExpectToken(")")) return this;
+                Expr = ExpectNode<Expression>();
+                ExpectToken(")");
+                return this;
             }
 
             return NoMatches("'('", "expression");

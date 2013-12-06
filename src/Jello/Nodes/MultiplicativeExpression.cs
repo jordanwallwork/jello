@@ -8,22 +8,13 @@ namespace Jello.Nodes
 
         protected override MultiplicativeExpression ParseNode()
         {
-            PrimaryExpression lhs;
-            if (ExpectNode(out lhs))
-            {
-                LHS = lhs;
-                object op;
-                if (AcceptToken("*", out op) || AcceptToken("/", out op))
-                {
-                    Operator = op.ToString();
+            LHS = ExpectNode<PrimaryExpression>();
 
-                    MultiplicativeExpression rhs;
-                    if (ExpectNode(out rhs))
-                    {
-                        RHS = rhs;
-                        return this;
-                    }
-                }
+            object op;
+            if (AcceptToken("*", out op) || AcceptToken("/", out op))
+            {
+                Operator = op.ToString();
+                RHS = ExpectNode<MultiplicativeExpression>();
             }
             return this;
         }
