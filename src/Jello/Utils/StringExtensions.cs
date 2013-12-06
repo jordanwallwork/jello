@@ -8,7 +8,6 @@ namespace Jello.Utils
         {
             if (!strings.Any()) return "";
             string firstPart;
-            string lastPart;
             if (strings.Count() > 2)
             {
                 firstPart = string.Join(", ", strings.Take(strings.Count() - 1));

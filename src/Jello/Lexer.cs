@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using Jello.Errors;
 using Jello.Utils;
@@ -60,8 +59,12 @@ namespace Jello
 
         private Token GetToken(TextReader input, char ch)
         {
-            if (ch.IsPunctuation() || ch.IsBasicOperator()) return CreateToken(ch);
-            if (ch.CanHaveEqualsAppended()) return TryGetOperatorWithAppendedEquals(input, ch);
+            if (ch.IsPunctuation()) return CreateToken(ch);
+            Token op;
+            if (TryGetOperator(input, ch, out op))
+            {
+                return op;
+            }
 
             if (ch == '(' || ch == '[') return OpenBrackets(ch);
             if (ch == ')' || ch == ']') return CloseBrackets(ch);
@@ -82,12 +85,27 @@ namespace Jello
             return CreateToken(type.ToString(), value);
         }
 
-        private Token TryGetOperatorWithAppendedEquals(TextReader input, char ch)
+        private bool TryGetOperator(TextReader input, char ch, out Token token)
         {
             var next = (char)input.Peek();
-            if (next != '=') return CreateToken(ch);
-            input.Read();
-            return CreateToken(ch + "=");
+            if (IsOperator(ch + next.ToString()))
+            {
+                token = CreateToken(ch.ToString() + (char)input.Read());
+                return true;
+            }
+            if (IsOperator(ch.ToString()))
+            {
+                token = CreateToken(ch);
+                return true;
+            }
+            token = null;
+            return false;
+        }
+
+        private static string[] _operators = { "+", "-", "*", "/", "=", "==", "<", "<=", ">", ">=", "&&", "||" };
+        private bool IsOperator(string str)
+        {
+            return _operators.Contains(str);
         }
 
         private Token DateToken(TextReader input)

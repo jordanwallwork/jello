@@ -2,16 +2,6 @@
 {
     public static class CharExtensions
     {
-        public static bool CanHaveEqualsAppended(this char ch)
-        {
-            return ch == '=' || ch == '<' || ch == '>';
-        }
-
-        public static bool IsBasicOperator(this char ch)
-        {
-            return ch == '+' || ch == '-' || ch == '*' || ch == '/';
-        }
-
         public static bool IsPunctuation(this char ch)
         {
             return ch == ',' || ch == ';';
