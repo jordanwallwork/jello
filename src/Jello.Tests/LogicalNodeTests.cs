@@ -10,18 +10,18 @@ namespace Jello.Tests
         public void ShouldResolveSimpleAndExpression()
         {
             var logicalAnd = new Jello().Parse<LogicalAndExpression>("true && false");
-            Assert.IsTrue(logicalAnd.LHS.LHS.LHS.LHS.Term.Bool.Value);
-            Assert.AreEqual("&&", logicalAnd.Operator);
-            Assert.IsFalse(logicalAnd.RHS.LHS.LHS.LHS.LHS.Term.Bool.Value);
+            Assert.IsTrue((bool)logicalAnd.LHS.GetValue());
+            Assert.IsFalse((bool)logicalAnd.RHS.GetValue());
+            Assert.IsFalse((bool)logicalAnd.GetValue());
         }
 
         [Test]
         public void ShouldResolveSimpleOrExpression()
         {
             var logicalOr = new Jello().Parse<LogicalOrExpression>("true || false");
-            Assert.IsTrue(logicalOr.LHS.LHS.LHS.LHS.LHS.Term.Bool.Value);
-            Assert.AreEqual("||", logicalOr.Operator);
-            Assert.IsFalse(logicalOr.RHS.LHS.LHS.LHS.LHS.LHS.Term.Bool.Value);
+            Assert.IsTrue((bool)logicalOr.LHS.GetValue());
+            Assert.IsFalse((bool)logicalOr.RHS.GetValue());
+            Assert.IsTrue((bool)logicalOr.GetValue());
         }
     }
 }

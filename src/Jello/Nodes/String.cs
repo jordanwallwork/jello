@@ -1,6 +1,6 @@
 namespace Jello.Nodes
 {
-    public class String : Node<String>
+    public class String : TerminalNode<String>
     {
         public string Value { get; set; }
 
@@ -12,6 +12,11 @@ namespace Jello.Nodes
                 Value = (string)strVal;
             }
             return this;
+        }
+
+        public override object GetValue()
+        {
+            return Value;
         }
     }
 }

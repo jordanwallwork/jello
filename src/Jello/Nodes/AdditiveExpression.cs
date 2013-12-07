@@ -2,12 +2,8 @@ using System.Collections.Generic;
 
 namespace Jello.Nodes
 {
-    public class AdditiveExpression : Node<AdditiveExpression>
+    public class AdditiveExpression : BinaryTreeNode<AdditiveExpression>
     {
-        public MultiplicativeExpression LHS { get; set; }  
-        public string Operator { get; set; }
-        public AdditiveExpression RHS { get; set; }
-
         protected override AdditiveExpression ParseNode()
         {
             LHS = ExpectNode<MultiplicativeExpression>();
@@ -18,6 +14,19 @@ namespace Jello.Nodes
                 RHS = ExpectNode<AdditiveExpression>();
             }
             return this;
+        }
+
+        public override INode GetSingleChild()
+        {
+            if (RHS == null) return LHS;
+            return null;
+        }
+
+        public override object GetValue()
+        {
+            if (Operator == "+") return Evaluate((l, r) => (decimal?) l + (decimal?) r);
+            if (Operator == "-") return Evaluate((l, r) => (decimal?) l - (decimal?) r);
+            return LHS.GetValue();
         }
     }
 }

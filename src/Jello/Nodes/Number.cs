@@ -1,6 +1,6 @@
 namespace Jello.Nodes
 {
-    public class Number : Node<Number>
+    public class Number : BinaryTreeNode<Number>
     {
         public decimal Value { get; set; }
 
@@ -12,6 +12,11 @@ namespace Jello.Nodes
                 Value = (decimal) decVal;
             }
             return this;
+        }
+
+        public override object GetValue()
+        {
+            return Value;
         }
     }
 }

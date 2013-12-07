@@ -1,11 +1,7 @@
 namespace Jello.Nodes
 {
-    public class MultiplicativeExpression : Node<MultiplicativeExpression>
+    public class MultiplicativeExpression : BinaryTreeNode<MultiplicativeExpression>
     {
-        public PrimaryExpression LHS { get; set; }  
-        public string Operator { get; set; }
-        public MultiplicativeExpression RHS { get; set; }
-
         protected override MultiplicativeExpression ParseNode()
         {
             LHS = ExpectNode<PrimaryExpression>();
@@ -17,6 +13,13 @@ namespace Jello.Nodes
                 RHS = ExpectNode<MultiplicativeExpression>();
             }
             return this;
+        }
+
+        public override object GetValue()
+        {
+            if (Operator == "*") return Evaluate((l, r) => (decimal?)l * (decimal?)r);
+            if (Operator == "/") return Evaluate((l, r) => (decimal?)l / (decimal?)r);
+            return LHS.GetValue();
         }
     }
 }

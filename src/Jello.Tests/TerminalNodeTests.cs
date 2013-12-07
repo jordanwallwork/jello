@@ -33,26 +33,21 @@ namespace Jello.Tests
         public void ShouldResolveBoolTerm()
         {
             var b = new Jello().Parse<Term>("true");
-            Assert.IsNotNull(b.Bool);
-            Assert.IsTrue(b.Bool.Value);
-            Assert.IsNull(b.String);
+            Assert.IsTrue((bool)b.GetValue());
         }
 
         [Test]
         public void ShouldResolveStringTerm()
         {
             var b = new Jello().Parse<Term>("\"string\"");
-            Assert.IsNotNull(b.String);
-            Assert.AreEqual("string", b.String.Value);
-            Assert.IsNull(b.Bool);
+            Assert.AreEqual("string", b.GetValue());
         }
 
         [Test]
         public void ShouldResolveDateTerm()
         {
             var d = new Jello().Parse<Term>("'1989-09-29'");
-            Assert.IsNotNull(d.Date);
-            Assert.AreEqual(new DateTime(1989, 09, 29), d.Date.Value);
+            Assert.AreEqual(new DateTime(1989, 09, 29), d.GetValue());
         }
 
         [Test]

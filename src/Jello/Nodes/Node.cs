@@ -6,7 +6,7 @@ using Jello.Utils;
 
 namespace Jello.Nodes
 {
-    public abstract class Node<T> where T : class
+    public abstract class Node<T> : INode where T : class
     {
         protected Jello Jello;
         protected Lexer Lexer;
@@ -48,7 +48,7 @@ namespace Jello.Nodes
             return true;
         }
 
-        public T ExpectNode<T>() where T : Node<T>
+        public INode ExpectNode<T>() where T : Node<T>
         {
             var currPos = Lexer.Pos;
             var _node = Activator.CreateInstance<T>().Parse(Jello, Lexer);
@@ -58,7 +58,7 @@ namespace Jello.Nodes
                 Lexer.ResetPos(currPos);
                 return null;
             }
-            return _node;
+            return _node.GetSingleChild() ?? _node;
         }
 
         public bool AcceptToken(string type)
@@ -81,7 +81,7 @@ namespace Jello.Nodes
             return true;
         }
 
-        public bool AcceptNode<T>(out T node) where T : Node<T>
+        public bool AcceptNode<T>(out INode node) where T : Node<T>
         {
             var currPos = Lexer.Pos;
             var _node = Activator.CreateInstance<T>().Parse(Jello, Lexer);
@@ -91,7 +91,7 @@ namespace Jello.Nodes
                 Lexer.ResetPos(currPos);
                 return false;
             }
-            node = _node;
+            node = _node.GetSingleChild() ?? _node;
             return true;
         }
 
@@ -99,6 +99,15 @@ namespace Jello.Nodes
         {
             Errors.Add(new ParseError("Expected " + expected.ToReadableOrList(), Lexer.LineNo, Lexer.Col));
             return this as T;
+        }
+
+        public abstract INode GetSingleChild();
+
+        public virtual object GetValue()
+        {
+            var singleChild = GetSingleChild();
+            if (singleChild != null) return singleChild.GetValue();
+            throw new NotImplementedException();
         }
     }
 }

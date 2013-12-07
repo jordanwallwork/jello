@@ -10,15 +10,16 @@ namespace Jello.Tests
         public void ShouldResolveSingleTerminalAsExpression()
         {
             var expr = new Jello().Parse<PrimaryExpression>("true");
-            Assert.IsNotNull(expr.Term);
-            Assert.IsTrue(expr.Term.Bool.Value);
+            Assert.IsNotNull(expr.Inner);
+            Assert.IsTrue((bool)expr.Inner.GetValue());
         }
 
         [Test]
         public void ShouldResolveSingleTerminalInParensAsExpression()
         {
             var expr = new Jello().Parse<PrimaryExpression>("(true)");
-            Assert.IsNotNull(expr.Expr);
+            Assert.IsNotNull(expr.Inner);
+            Assert.IsTrue((bool)expr.Inner.GetValue());
         }
 
         [Test]

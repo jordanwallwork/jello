@@ -1,11 +1,7 @@
 namespace Jello.Nodes
 {
-    public class LogicalOrExpression : Node<LogicalOrExpression>
+    public class LogicalOrExpression : BinaryTreeNode<LogicalOrExpression>
     {
-        public LogicalAndExpression LHS { get; set; }
-        public string Operator { get; set; }
-        public LogicalOrExpression RHS { get; set; }
-
         protected override LogicalOrExpression ParseNode()
         {
             LHS = ExpectNode<LogicalAndExpression>();
@@ -15,6 +11,11 @@ namespace Jello.Nodes
                 RHS = ExpectNode<LogicalOrExpression>();
             }
             return this;
+        }
+
+        public override object GetValue()
+        {
+            return RHS == null ? LHS.GetValue() : Evaluate((l, r) => (bool?)l == true || (bool?)r == true);
         }
     }
 }

@@ -3,7 +3,7 @@ using Jello.Errors;
 
 namespace Jello.Nodes
 {
-    public class Date : Node<Date>
+    public class Date : TerminalNode<Date>
     {
         public DateTime Value { get; set; }
 
@@ -23,6 +23,11 @@ namespace Jello.Nodes
                 }
             }
             return this;
+        }
+
+        public override object GetValue()
+        {
+            return Value;
         }
     }
 }

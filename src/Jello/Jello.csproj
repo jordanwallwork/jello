@@ -41,7 +41,10 @@
   <ItemGroup>
     <Compile Include="IDateParser.cs" />
     <Compile Include="JelloSettings.cs" />
+    <Compile Include="Nodes\BinaryTreeNode.cs" />
     <Compile Include="Nodes\Date.cs" />
+    <Compile Include="Nodes\INode.cs" />
+    <Compile Include="Nodes\TerminalNode.cs" />
     <Compile Include="StandardDateParser.cs" />
     <Compile Include="Utils\CharExtensions.cs" />
     <Compile Include="Jello.cs" />

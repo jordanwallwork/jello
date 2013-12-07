@@ -1,6 +1,6 @@
 namespace Jello.Nodes
 {
-    public class Bool : Node<Bool>
+    public class Bool : TerminalNode<Bool>
     {
         public bool Value { get; set; }
 
@@ -13,5 +13,11 @@ namespace Jello.Nodes
             }
             return this;
         }
+
+        public override object GetValue()
+        {
+            return Value;
+        }
     }
+
 }

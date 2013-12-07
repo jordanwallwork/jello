@@ -2,42 +2,28 @@ namespace Jello.Nodes
 {
     public class Term : Node<Term>
     {
-        public Bool Bool { get; set; }
-        public String String { get; set; }
-        public Number Number { get; set; }
-        public Date Date { get; set; }
+        public INode Node { get; set; }
 
         protected override Term ParseNode()
         {
-            Bool boolNode;
-            if (AcceptNode(out boolNode))
+            INode node;
+            if (AcceptNode<Bool>(out node) || AcceptNode<String>(out node) ||
+                AcceptNode<Number>(out node) || AcceptNode<Date>(out node))
             {
-                Bool = boolNode;
+                Node = node;
                 return this;
             }
-
-            String stringNode;
-            if (AcceptNode(out stringNode))
-            {
-                String = stringNode;
-                return this;
-            }
-
-            Number numberNode;
-            if (AcceptNode(out numberNode))
-            {
-                Number = numberNode;
-                return this;
-            }
-
-            Date dateNode;
-            if (AcceptNode(out dateNode))
-            {
-                Date = dateNode;
-                return this;
-            }
-
             return NoMatches("bool", "string", "number", "date");
+        }
+
+        public override INode GetSingleChild()
+        {
+            return Node;
+        }
+
+        public override object GetValue()
+        {
+            return Node.GetValue();
         }
     }
 }
