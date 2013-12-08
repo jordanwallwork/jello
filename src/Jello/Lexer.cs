@@ -102,7 +102,7 @@ namespace Jello
             return false;
         }
 
-        private static string[] _operators = { "+", "-", "*", "/", "=", "==", "<", "<=", ">", ">=", "&&", "||" };
+        private static string[] _operators = { "+", "-", "*", "/", "=", "==", "!=", "<", "<=", ">", ">=", "&&", "||" };
         private bool IsOperator(string str)
         {
             return _operators.Contains(str);

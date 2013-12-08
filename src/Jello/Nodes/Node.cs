@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Jello.Errors;
 using Jello.Utils;
 
@@ -65,6 +66,23 @@ namespace Jello.Nodes
         {
             object discardVal;
             return AcceptToken(type, out discardVal);
+        }
+
+        public bool AcceptToken(out object valueOrType, params string[] types)
+        {
+            var currPos = Lexer.Pos;
+            var nextTok = Lexer.Next();
+            foreach (var type in types)
+            {
+                if (nextTok.Type == type)
+                {
+                    valueOrType = nextTok.Value ?? nextTok.Type;
+                    return true;
+                }
+            }
+            valueOrType = null;
+            Lexer.ResetPos(currPos);
+            return false;
         }
 
         public bool AcceptToken(string type, out object valueOrType)

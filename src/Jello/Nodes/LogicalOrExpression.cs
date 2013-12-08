@@ -7,7 +7,6 @@ namespace Jello.Nodes
             LHS = ExpectNode<LogicalAndExpression>();
             if (AcceptToken("||"))
             {
-                Operator = "||";
                 RHS = ExpectNode<LogicalOrExpression>();
             }
             return this;

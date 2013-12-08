@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArithmeticNodeTests.cs" />
+    <Compile Include="BooleanExpressionTests.cs" />
     <Compile Include="LexerTests.cs" />
     <Compile Include="LogicalNodeTests.cs" />
     <Compile Include="TerminalNodeTests.cs" />

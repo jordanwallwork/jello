@@ -8,7 +8,7 @@ namespace Jello.Nodes
         {
             LHS = ExpectNode<MultiplicativeExpression>();
             object op;
-            if (AcceptToken("+", out op) || AcceptToken("-", out op))
+            if (AcceptToken(out op, "+", "-"))
             {
                 Operator = op.ToString();
                 RHS = ExpectNode<AdditiveExpression>();
