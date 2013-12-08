@@ -58,8 +58,7 @@ namespace Jello.Tests
             Assert.AreEqual(new DateTime(2010, 1, 1), boolean.LHS.GetValue());
             Assert.AreEqual("<", boolean.Operator);
             Assert.AreEqual(new DateTime(2012, 1, 1), boolean.RHS.GetValue());
-            var o = boolean.GetValue();
-            Assert.IsTrue((bool)o);
+            Assert.IsTrue((bool)boolean.GetValue());
         }
     }
 }
