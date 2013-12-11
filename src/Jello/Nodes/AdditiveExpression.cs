@@ -6,12 +6,16 @@ namespace Jello.Nodes
     {
         protected override AdditiveExpression ParseNode()
         {
-            LHS = ExpectNode<MultiplicativeExpression>();
-            object op;
-            if (AcceptToken(out op, "+", "-"))
+            INode node;
+            if (ExpectNode<MultiplicativeExpression>(out node))
             {
-                Operator = op.ToString();
-                RHS = ExpectNode<AdditiveExpression>();
+                LHS = node;
+                object op;
+                if (AcceptToken(out op, "+", "-"))
+                {
+                    Operator = op.ToString();
+                    RHS = ExpectNode<AdditiveExpression>();
+                }
             }
             return this;
         }

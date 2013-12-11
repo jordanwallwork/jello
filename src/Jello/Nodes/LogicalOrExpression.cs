@@ -4,10 +4,14 @@ namespace Jello.Nodes
     {
         protected override LogicalOrExpression ParseNode()
         {
-            LHS = ExpectNode<LogicalAndExpression>();
-            if (AcceptToken("||"))
+            INode expr;
+            if (ExpectNode<LogicalAndExpression>(out expr))
             {
-                RHS = ExpectNode<LogicalOrExpression>();
+                LHS = expr;
+                if (AcceptToken("||"))
+                {
+                    RHS = ExpectNode<LogicalOrExpression>();
+                }
             }
             return this;
         }

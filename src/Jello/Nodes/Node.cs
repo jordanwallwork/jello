@@ -30,6 +30,17 @@ namespace Jello.Nodes
 
         protected abstract T ParseNode();
 
+        public bool ExpectKeyword(string keyword)
+        {
+            var nextTok = Lexer.Next();
+            if (nextTok.Type != "keyword" || nextTok.Value as string != keyword)
+            {
+                Errors.Add(new ParseError("Expected keyword " + keyword, nextTok.LineNo, nextTok.Col));
+                return false;
+            }
+            return true;
+        }
+
         public bool ExpectToken(string type)
         {
             object discardVal;
@@ -49,6 +60,12 @@ namespace Jello.Nodes
             return true;
         }
 
+        public bool ExpectNode<T>(out INode node) where T : Node<T>
+        {
+            node = ExpectNode<T>();
+            return node != null;
+        } 
+
         public INode ExpectNode<T>() where T : Node<T>
         {
             var currPos = Lexer.Pos;
@@ -60,6 +77,18 @@ namespace Jello.Nodes
                 return null;
             }
             return _node.GetSingleChild() ?? _node;
+        }
+
+        public bool AcceptKeyword(string keyword)
+        {
+            var currPos = Lexer.Pos;
+            var nextTok = Lexer.Next();
+            if (nextTok.Type != "keyword" && nextTok.Value as string != keyword)
+            {
+                Lexer.ResetPos(currPos);
+                return false;
+            }
+            return true;
         }
 
         public bool AcceptToken(string type)

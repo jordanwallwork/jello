@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Jello.Tests
 {
@@ -139,6 +138,13 @@ namespace Jello.Tests
         {
             var lexer = new Lexer("'1989-09-29'");
             AssertTokenIs("date", "1989-09-29", lexer.Next());
+        }
+
+        [Test]
+        public void ShouldRecognizeReturnKeyword()
+        {
+            var lexer = new Lexer("return");
+            AssertTokenIs("keyword", "return", lexer.Next());
         }
     }
 }

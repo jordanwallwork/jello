@@ -2,16 +2,18 @@ namespace Jello.Nodes
 {
     public class BooleanExpression : BinaryTreeNode<BooleanExpression>
     {
-
         protected override BooleanExpression ParseNode()
         {
-            LHS = ExpectNode<AdditiveExpression>();
-
-            object op;
-            if (AcceptToken(out op, "==", "!=", "<", "<=", ">", ">="))
+            INode node;
+            if (ExpectNode<AdditiveExpression>(out node))
             {
-                Operator = op.ToString();
-                RHS = ExpectNode<BooleanExpression>();
+                LHS = node;
+                object op;
+                if (AcceptToken(out op, "==", "!=", "<", "<=", ">", ">="))
+                {
+                    Operator = op.ToString();
+                    RHS = ExpectNode<BooleanExpression>();
+                }
             }
             return this;
         }
