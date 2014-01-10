@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Jello.DataSources;
 
 namespace Jello.Tests.DataSources
@@ -21,7 +18,7 @@ namespace Jello.Tests.DataSources
             return _data.TryGetValue(key, out value);
         }
 
-        public override bool TrySet(string key, out object value)
+        public override bool TrySet(string key, bool isNew, out object value)
         {
             throw new NotImplementedException();
         }

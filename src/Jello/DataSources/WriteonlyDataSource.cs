@@ -8,6 +8,6 @@ namespace Jello.DataSources
             return false;
         }
 
-        public abstract bool TrySet(string key, out object value);
+        public abstract bool TrySet(string key, bool isNew, out object value);
     }
 }

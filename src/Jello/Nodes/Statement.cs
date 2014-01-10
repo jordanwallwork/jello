@@ -10,7 +10,7 @@ namespace Jello.Nodes
         protected override Statement ParseNode()
         {
             INode node;
-            if (AcceptNode<ReturnStatement>(out node) || AcceptNode<IfStatement>(out node))
+            if (AcceptNode<ReturnStatement>(out node) || AcceptNode<IfStatement>(out node) || AcceptNode<AssignmentStatement>(out node))
             {
                 LHS = node;
                 return this;

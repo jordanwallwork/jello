@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using Jello.DataSources;
 using Jello.Nodes;
 
 namespace Jello
@@ -34,11 +31,11 @@ namespace Jello
             return false;
         }
 
-        public bool TrySet(string key, out object value)
+        public bool TrySet(string key, bool isNew, out object value)
         {
             foreach (var dataSource in Settings.DataSources)
             {
-                if (dataSource.TrySet(key, out value)) return true;
+                if (dataSource.TrySet(key, isNew, out value)) return true;
             }
             value = null;
             return false;

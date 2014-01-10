@@ -45,6 +45,7 @@
     <Compile Include="DataSources\WriteonlyDataSource.cs" />
     <Compile Include="IDateParser.cs" />
     <Compile Include="JelloSettings.cs" />
+    <Compile Include="Nodes\AssignmentStatement.cs" />
     <Compile Include="Nodes\BinaryTreeNode.cs" />
     <Compile Include="Nodes\Date.cs" />
     <Compile Include="Nodes\Identifier.cs" />
