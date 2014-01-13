@@ -1,7 +1,9 @@
-﻿namespace Jello.Nodes
+﻿using Jello.DataSources;
+
+namespace Jello.Nodes
 {
     public interface INode
     {
-        object GetValue();
+        object GetValue(IDataSource dataSource);
     }
 }

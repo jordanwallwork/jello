@@ -20,25 +20,5 @@ namespace Jello
             node.Parse(this, lexer);
             return node;
         }
-
-        public bool TryGet(string key, out object value)
-        {
-            foreach (var dataSource in Settings.DataSources)
-            {
-                if (dataSource.TryGet(key, out value)) return true;
-            }
-            value = null;
-            return false;
-        }
-
-        public bool TrySet(string key, bool isNew, out object value)
-        {
-            foreach (var dataSource in Settings.DataSources)
-            {
-                if (dataSource.TrySet(key, isNew, out value)) return true;
-            }
-            value = null;
-            return false;
-        }
     }
 }

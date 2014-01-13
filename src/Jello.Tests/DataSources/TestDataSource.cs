@@ -18,7 +18,7 @@ namespace Jello.Tests.DataSources
             return _data.TryGetValue(key, out value);
         }
 
-        public override bool TrySet(string key, bool isNew, out object value)
+        public override bool TrySet(string key, bool isNew, object value)
         {
             throw new NotImplementedException();
         }

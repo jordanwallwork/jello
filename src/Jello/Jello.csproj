@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\CompositeDataSource.cs" />
     <Compile Include="DataSources\IDataSource.cs" />
     <Compile Include="DataSources\ReadonlyDataSource.cs" />
     <Compile Include="DataSources\ReadWriteDataSource.cs" />

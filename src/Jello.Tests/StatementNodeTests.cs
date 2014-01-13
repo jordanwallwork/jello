@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Jello.Nodes;
+using Jello.Tests.DataSources;
 using NUnit.Framework;
 
 namespace Jello.Tests
@@ -12,21 +13,21 @@ namespace Jello.Tests
         {
             var retStmt = new Jello().Parse<ReturnStatement>("return 1");
             Assert.IsTrue(!retStmt.Errors.Any());
-            Assert.AreEqual(1, retStmt.LHS.GetValue());
+            Assert.AreEqual(1, retStmt.LHS.GetValue(new TestDataSource()));
         }
 
         [Test]
         public void ShouldResolveReturnStatementAsStatement()
         {
             var stmt = new Jello().Parse<Statement>("return true");
-            Assert.IsTrue((bool) stmt.LHS.GetValue());
+            Assert.IsTrue((bool) stmt.LHS.GetValue(new TestDataSource()));
         }
 
         [Test]
         public void ShouldResolveIfStatement()
         {
             var stmt = new Jello().Parse<IfStatement>("if false then return true");
-            Assert.IsFalse((bool)stmt.Condition.GetValue());
+            Assert.IsFalse((bool)stmt.Condition.GetValue(new TestDataSource()));
             Assert.IsAssignableFrom<ReturnStatement>(stmt.Statements);
         }
 
@@ -38,7 +39,7 @@ namespace Jello.Tests
             var assStmt = stmt.GetSingleChild() as AssignmentStatement;
             Assert.IsTrue(assStmt.IsNew);
             Assert.AreEqual("t", assStmt.Identifier);
-            Assert.AreEqual(1, assStmt.Expression.GetValue());
+            Assert.AreEqual(1, assStmt.Expression.GetValue(new TestDataSource()));
         }
     }
 }

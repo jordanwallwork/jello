@@ -1,3 +1,5 @@
+using Jello.DataSources;
+
 namespace Jello.Nodes
 {
     public class Bool : TerminalNode<Bool>
@@ -14,7 +16,7 @@ namespace Jello.Nodes
             return this;
         }
 
-        public override object GetValue()
+        public override object GetValue(IDataSource dataSource)
         {
             return Value;
         }

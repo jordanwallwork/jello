@@ -1,4 +1,5 @@
 using System;
+using Jello.DataSources;
 using Jello.Errors;
 
 namespace Jello.Nodes
@@ -25,7 +26,7 @@ namespace Jello.Nodes
             return this;
         }
 
-        public override object GetValue()
+        public override object GetValue(IDataSource dataSource)
         {
             return Value;
         }

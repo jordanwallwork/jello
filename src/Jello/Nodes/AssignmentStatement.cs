@@ -1,3 +1,5 @@
+using Jello.DataSources;
+
 namespace Jello.Nodes
 {
     public class AssignmentStatement : Node<AssignmentStatement>
@@ -29,9 +31,9 @@ namespace Jello.Nodes
             return null;
         }
 
-        public override object GetValue()
+        public override object GetValue(IDataSource dataSource)
         {
-            return Expression.GetValue();
+            return Expression.GetValue(dataSource);
         }
     }
 }

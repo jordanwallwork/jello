@@ -1,3 +1,5 @@
+using Jello.DataSources;
+
 namespace Jello.Nodes
 {
     public class ReturnStatement : Node<ReturnStatement>
@@ -19,9 +21,9 @@ namespace Jello.Nodes
             return null;
         }
 
-        public override object GetValue()
+        public override object GetValue(IDataSource dataSource)
         {
-            return LHS.GetValue();
+            return LHS.GetValue(dataSource);
         }
     }
 }

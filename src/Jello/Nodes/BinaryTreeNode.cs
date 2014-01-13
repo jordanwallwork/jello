@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using Jello.DataSources;
 
 namespace Jello.Nodes
 {
@@ -14,9 +15,9 @@ namespace Jello.Nodes
             return RHS == null ? LHS : null;
         }
 
-        protected object Evaluate(Func<object, object, object> func)
+        protected object Evaluate(Func<object, object, object> func, IDataSource dataSource)
         {
-            return func(LHS.GetValue(), RHS.GetValue());
+            return func(LHS.GetValue(dataSource), RHS.GetValue(dataSource));
         } 
     }
 }

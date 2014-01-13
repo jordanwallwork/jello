@@ -1,4 +1,5 @@
 ﻿using Jello.Nodes;
+using Jello.Tests.DataSources;
 using NUnit.Framework;
 
 namespace Jello.Tests
@@ -11,7 +12,7 @@ namespace Jello.Tests
         {
             var expr = new Jello().Parse<PrimaryExpression>("true");
             Assert.IsNotNull(expr.Inner);
-            Assert.IsTrue((bool)expr.Inner.GetValue());
+            Assert.IsTrue((bool)expr.Inner.GetValue(new TestDataSource()));
         }
 
         [Test]
@@ -19,7 +20,7 @@ namespace Jello.Tests
         {
             var expr = new Jello().Parse<PrimaryExpression>("(true)");
             Assert.IsNotNull(expr.Inner);
-            Assert.IsTrue((bool)expr.Inner.GetValue());
+            Assert.IsTrue((bool)expr.Inner.GetValue(new TestDataSource()));
         }
 
         [Test]

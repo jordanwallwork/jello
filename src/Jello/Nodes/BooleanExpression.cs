@@ -1,3 +1,5 @@
+using Jello.DataSources;
+
 namespace Jello.Nodes
 {
     public class BooleanExpression : BinaryTreeNode<BooleanExpression>
@@ -18,17 +20,17 @@ namespace Jello.Nodes
             return this;
         }
 
-        public override object GetValue()
+        public override object GetValue(IDataSource dataSource)
         {
-            if (Operator == "==") return Evaluate((l,r) => l.Equals(r));
-            if (Operator == "!=") return Evaluate((l,r) => !l.Equals(r));
+            if (Operator == "==") return Evaluate((l, r) => l.Equals(r), dataSource);
+            if (Operator == "!=") return Evaluate((l, r) => !l.Equals(r), dataSource);
 
-            if (Operator == "<") return Evaluate((l, r) => (decimal?)l < (decimal?)r);
-            if (Operator == "<=") return Evaluate((l, r) => (decimal?)l <= (decimal?)r);
-            if (Operator == ">") return Evaluate((l, r) => (decimal?)l > (decimal?)r);
-            if (Operator == ">=") return Evaluate((l, r) => (decimal?)l >= (decimal?)r);
+            if (Operator == "<") return Evaluate((l, r) => (decimal?)l < (decimal?)r, dataSource);
+            if (Operator == "<=") return Evaluate((l, r) => (decimal?)l <= (decimal?)r, dataSource);
+            if (Operator == ">") return Evaluate((l, r) => (decimal?)l > (decimal?)r, dataSource);
+            if (Operator == ">=") return Evaluate((l, r) => (decimal?)l >= (decimal?)r, dataSource);
 
-            return LHS.GetValue();
+            return LHS.GetValue(dataSource);
         }
     }
 }

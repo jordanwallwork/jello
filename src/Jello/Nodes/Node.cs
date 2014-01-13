@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Jello.DataSources;
 using Jello.Errors;
 using Jello.Utils;
 
@@ -150,10 +151,10 @@ namespace Jello.Nodes
 
         public abstract INode GetSingleChild();
 
-        public virtual object GetValue()
+        public virtual object GetValue(IDataSource dataSource)
         {
             var singleChild = GetSingleChild();
-            if (singleChild != null) return singleChild.GetValue();
+            if (singleChild != null) return singleChild.GetValue(dataSource);
             throw new NotImplementedException();
         }
     }

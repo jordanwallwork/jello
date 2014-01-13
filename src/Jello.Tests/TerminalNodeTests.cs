@@ -1,5 +1,6 @@
 ﻿using System;
 using Jello.Nodes;
+using Jello.Tests.DataSources;
 using NUnit.Framework;
 using String = Jello.Nodes.String;
 
@@ -33,21 +34,21 @@ namespace Jello.Tests
         public void ShouldResolveBoolTerm()
         {
             var b = new Jello().Parse<Term>("true");
-            Assert.IsTrue((bool)b.GetValue());
+            Assert.IsTrue((bool)b.GetValue(new TestDataSource()));
         }
 
         [Test]
         public void ShouldResolveStringTerm()
         {
             var b = new Jello().Parse<Term>("\"string\"");
-            Assert.AreEqual("string", b.GetValue());
+            Assert.AreEqual("string", b.GetValue(new TestDataSource()));
         }
 
         [Test]
         public void ShouldResolveDateTerm()
         {
             var d = new Jello().Parse<Term>("'1989-09-29'");
-            Assert.AreEqual(new DateTime(1989, 09, 29), d.GetValue());
+            Assert.AreEqual(new DateTime(1989, 09, 29), d.GetValue(new TestDataSource()));
         }
 
         [Test]

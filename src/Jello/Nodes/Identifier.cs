@@ -1,4 +1,5 @@
 using System;
+using Jello.DataSources;
 
 namespace Jello.Nodes
 {
@@ -16,10 +17,10 @@ namespace Jello.Nodes
             return this;
         }
 
-        public override object GetValue()
+        public override object GetValue(IDataSource dataSource)
         {
             object value;
-            if (Jello.TryGet(Name, out value)) return value;
+            if (dataSource.TryGet(Name, out value)) return value;
             throw new Exception("Unrecognised identifier: " + Name);
         }
     }

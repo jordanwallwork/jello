@@ -1,3 +1,5 @@
+using Jello.DataSources;
+
 namespace Jello.Nodes
 {
     public class LogicalAndExpression : BinaryTreeNode<LogicalAndExpression>
@@ -16,9 +18,9 @@ namespace Jello.Nodes
             return this;
         }
 
-        public override object GetValue()
+        public override object GetValue(IDataSource dataSource)
         {
-            return RHS == null ? LHS.GetValue() : Evaluate((l, r) => (bool?)l == true && (bool?)r == true);
+            return RHS == null ? LHS.GetValue(dataSource) : Evaluate((l, r) => (bool?)l == true && (bool?)r == true, dataSource);
         }
     }
 }

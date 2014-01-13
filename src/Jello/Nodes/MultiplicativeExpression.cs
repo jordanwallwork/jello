@@ -1,3 +1,5 @@
+using Jello.DataSources;
+
 namespace Jello.Nodes
 {
     public class MultiplicativeExpression : BinaryTreeNode<MultiplicativeExpression>
@@ -18,11 +20,11 @@ namespace Jello.Nodes
             return this;
         }
 
-        public override object GetValue()
+        public override object GetValue(IDataSource dataSource)
         {
-            if (Operator == "*") return Evaluate((l, r) => (decimal?)l * (decimal?)r);
-            if (Operator == "/") return Evaluate((l, r) => (decimal?)l / (decimal?)r);
-            return LHS.GetValue();
+            if (Operator == "*") return Evaluate((l, r) => (decimal?)l * (decimal?)r, dataSource);
+            if (Operator == "/") return Evaluate((l, r) => (decimal?)l / (decimal?)r, dataSource);
+            return LHS.GetValue(dataSource);
         }
     }
 }

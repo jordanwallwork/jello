@@ -12,21 +12,15 @@ namespace Jello.Tests
         [Test]
         public void ShouldAcceptDataSource()
         {
-            var settings = new JelloSettings
+            var dataSource = new TestDataSource(new Dictionary<string, object>
             {
-                DataSources = new List<IDataSource>
-                {
-                    new TestDataSource(new Dictionary<string, object>
-                    {
-                        { "Num", 123 },
-                        { "String", "abc" },
-                        { "Bool", true }
-                    })
-                }
-            };
-            Assert.AreEqual(123, new Jello(settings).Parse<Identifier>("Num").GetValue());
-            Assert.AreEqual("abc", new Jello(settings).Parse<Identifier>("String").GetValue());
-            Assert.IsTrue((bool)new Jello(settings).Parse<Identifier>("Bool").GetValue());
+                {"Num", 123},
+                {"String", "abc"},
+                {"Bool", true}
+            });
+            Assert.AreEqual(123, new Jello().Parse<Identifier>("Num").GetValue(dataSource));
+            Assert.AreEqual("abc", new Jello().Parse<Identifier>("String").GetValue(dataSource));
+            Assert.IsTrue((bool)new Jello().Parse<Identifier>("Bool").GetValue(dataSource));
         }
     }
 }
