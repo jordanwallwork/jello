@@ -1,24 +1,28 @@
 ﻿using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using Jello.Nodes;
 
 namespace Jello
 {
     public class Jello
     {
-        public JelloSettings Settings { get; set; }
+        public Settings Settings { get; set; }
 
-        public Jello(JelloSettings settings = null)
+        public Jello(Settings settings = null)
         {
-            Settings = settings ?? new JelloSettings();
+            Settings = settings ?? new Settings();
         }
 
-        public T Parse<T>(string input) where T : Node<T>
+        public ParseResult Parse(string input)
         {
             var lexer = new Lexer(input);
-
-            var node = Activator.CreateInstance<T>();
+            if (lexer.Errors.Any()) return new ParseResult(lexer.Errors);
+            var node = new PrimaryExpression();
             node.Parse(this, lexer);
-            return node;
+            if (node.Errors.Any()) return new ParseResult(node.Errors);
+            return new ParseResult(node);
         }
     }
 }

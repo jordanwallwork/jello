@@ -7,54 +7,54 @@ using String = Jello.Nodes.String;
 namespace Jello.Tests
 {
     [TestFixture]
-    public class TerminalNodeTests
+    public class TerminalNodeTests : TestBase
     {
         [Test]
         public void ShouldResolveBool()
         {
-            var b = new Jello().Parse<Bool>("true");
+            var b = Parse<Bool>("true");
             Assert.IsTrue(b.Value);
         }
 
         [Test]
         public void ShouldResolveString()
         {
-            var s = new Jello().Parse<String>("\"this is a string\"");
+            var s = Parse<String>("\"this is a string\"");
             Assert.AreEqual("this is a string", s.Value);
         }
 
         [Test]
         public void ShouldResolveInt()
         {
-            var i = new Jello().Parse<Number>("1.23");
+            var i = Parse<Number>("1.23");
             Assert.AreEqual(1.23, i.Value);
         }
 
         [Test]
         public void ShouldResolveBoolTerm()
         {
-            var b = new Jello().Parse<Term>("true");
+            var b = Parse<Term>("true");
             Assert.IsTrue((bool)b.GetValue(new TestDataSource()));
         }
 
         [Test]
         public void ShouldResolveStringTerm()
         {
-            var b = new Jello().Parse<Term>("\"string\"");
+            var b = Parse<Term>("\"string\"");
             Assert.AreEqual("string", b.GetValue(new TestDataSource()));
         }
 
         [Test]
         public void ShouldResolveDateTerm()
         {
-            var d = new Jello().Parse<Term>("'1989-09-29'");
+            var d = Parse<Term>("'1989-09-29'");
             Assert.AreEqual(new DateTime(1989, 09, 29), d.GetValue(new TestDataSource()));
         }
 
         [Test]
         public void ShouldShowUsefulErrorInformation()
         {
-            var expr = new Jello().Parse<Term>("");
+            var expr = Parse<Term>("");
             var error = expr.Errors[0];
             Assert.AreEqual(1, error.LineNo);
             Assert.AreEqual(1, error.Col);

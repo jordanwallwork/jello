@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Jello.Tests
 {
     [TestFixture]
-    public class IdentifierNodeTests
+    public class IdentifierNodeTests : TestBase
     {
         [Test]
         public void ShouldAcceptDataSource()
@@ -18,9 +18,9 @@ namespace Jello.Tests
                 {"String", "abc"},
                 {"Bool", true}
             });
-            Assert.AreEqual(123, new Jello().Parse<Identifier>("Num").GetValue(dataSource));
-            Assert.AreEqual("abc", new Jello().Parse<Identifier>("String").GetValue(dataSource));
-            Assert.IsTrue((bool)new Jello().Parse<Identifier>("Bool").GetValue(dataSource));
+            Assert.AreEqual(123, Parse<Identifier>("Num").GetValue(dataSource));
+            Assert.AreEqual("abc", Parse<Identifier>("String").GetValue(dataSource));
+            Assert.IsTrue((bool)Parse<Identifier>("Bool").GetValue(dataSource));
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace Jello.Tests
 {
     [TestFixture]
-    public class LexerTests
+    public class LexerTests : TestBase
     {
         private static void AssertTokenIs(string type, Token token)
         {
