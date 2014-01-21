@@ -50,7 +50,6 @@
     <Compile Include="IdentifierNodeTests.cs" />
     <Compile Include="LexerTests.cs" />
     <Compile Include="LogicalNodeTests.cs" />
-    <Compile Include="StatementNodeTests.cs" />
     <Compile Include="TerminalNodeTests.cs" />
     <Compile Include="PrimaryExpressionNodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

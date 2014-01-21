@@ -41,20 +41,12 @@
   <ItemGroup>
     <Compile Include="DataSources\CompositeDataSource.cs" />
     <Compile Include="DataSources\IDataSource.cs" />
-    <Compile Include="DataSources\ReadonlyDataSource.cs" />
-    <Compile Include="DataSources\ReadWriteDataSource.cs" />
-    <Compile Include="DataSources\WriteonlyDataSource.cs" />
     <Compile Include="IDateParser.cs" />
     <Compile Include="JelloSettings.cs" />
-    <Compile Include="Nodes\AssignmentStatement.cs" />
     <Compile Include="Nodes\BinaryTreeNode.cs" />
     <Compile Include="Nodes\Date.cs" />
     <Compile Include="Nodes\Identifier.cs" />
-    <Compile Include="Nodes\IfStatement.cs" />
     <Compile Include="Nodes\INode.cs" />
-    <Compile Include="Nodes\ReturnStatement.cs" />
-    <Compile Include="Nodes\Statement.cs" />
-    <Compile Include="Nodes\StatementList.cs" />
     <Compile Include="Nodes\TerminalNode.cs" />
     <Compile Include="StandardDateParser.cs" />
     <Compile Include="Utils\CharExtensions.cs" />

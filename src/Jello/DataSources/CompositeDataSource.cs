@@ -18,14 +18,5 @@
             value = null;
             return false;
         }
-
-        public bool TrySet(string key, bool isNew, object value)
-        {
-            foreach (var dataSource in _dataSources)
-            {
-                if (dataSource.TrySet(key, isNew, value)) return true;
-            }
-            return false;
-        }
     }
 }
