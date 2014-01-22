@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Jello.DataSources;
 using Jello.Errors;
 using Jello.Nodes;
 
@@ -20,6 +21,11 @@ namespace Jello
         {
             Success = false;
             Errors = errors;
+        }
+
+        public object Execute(IDataSource dataSource)
+        {
+            return _root.GetValue(dataSource);
         }
     }
 }
