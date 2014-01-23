@@ -22,5 +22,10 @@ namespace Jello.Nodes
         {
             return RHS == null ? LHS.GetValue(dataSource) : Evaluate((l, r) => (bool?)l == true || (bool?)r == true, dataSource);
         }
+
+        public override ValueType Type(IDataSource dataSource)
+        {
+            return RHS == null ? LHS.Type(dataSource) : ValueType.Bool;
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace Jello.Tests
             Assert.IsTrue((bool)logicalAnd.LHS.GetValue(new TestDataSource()));
             Assert.IsFalse((bool)logicalAnd.RHS.GetValue(new TestDataSource()));
             Assert.IsFalse((bool)logicalAnd.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, logicalAnd.Type(new TestDataSource()));
         }
 
         [Test]
@@ -23,6 +24,7 @@ namespace Jello.Tests
             Assert.IsTrue((bool)logicalOr.LHS.GetValue(new TestDataSource()));
             Assert.IsFalse((bool)logicalOr.RHS.GetValue(new TestDataSource()));
             Assert.IsTrue((bool)logicalOr.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, logicalOr.Type(new TestDataSource()));
         }
     }
 }

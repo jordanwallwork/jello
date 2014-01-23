@@ -13,6 +13,7 @@ namespace Jello.Tests
         {
             var additiveExpr = Parse<AdditiveExpression>("1");
             Assert.AreEqual(1, additiveExpr.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Number, additiveExpr.Type(new TestDataSource()));
         }
 
         [Test]
@@ -24,6 +25,7 @@ namespace Jello.Tests
             Assert.AreEqual(4, additiveExpr.RHS.GetValue(new TestDataSource()));
 
             Assert.AreEqual(8, additiveExpr.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Number, additiveExpr.Type(new TestDataSource()));
         }
 
         [Test]
@@ -33,6 +35,7 @@ namespace Jello.Tests
             Assert.AreEqual(2, additiveExpr.LHS.GetValue(new TestDataSource()));
             Assert.AreEqual("/", additiveExpr.Operator);
             Assert.AreEqual(4, additiveExpr.RHS.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Number, additiveExpr.Type(new TestDataSource()));
         }
 
         [Test]
@@ -51,6 +54,7 @@ namespace Jello.Tests
             Assert.AreEqual(6, additiveExpr.LHS.GetValue(new TestDataSource()));
             Assert.AreEqual("-", additiveExpr.Operator);
             Assert.AreEqual(1, additiveExpr.RHS.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Number, additiveExpr.Type(new TestDataSource()));
         }
 
         [Test]
@@ -68,6 +72,7 @@ namespace Jello.Tests
 
             Assert.AreEqual(6, me.GetValue(new TestDataSource()));
             Assert.AreEqual(2, additiveExpr.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Number, additiveExpr.Type(new TestDataSource()));
         }
 
         [Test]
@@ -75,6 +80,7 @@ namespace Jello.Tests
         {
             var additiveExpr = Parse<MultiplicativeExpression>("(1 / 2) * 3");
             Assert.AreEqual(1.5, additiveExpr.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Number, additiveExpr.Type(new TestDataSource()));
         }
 
         [Test]
@@ -82,6 +88,7 @@ namespace Jello.Tests
         {
             var additiveExpr = Parse<AdditiveExpression>("2 * 2 + 4");
             Assert.AreEqual(8, additiveExpr.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Number, additiveExpr.Type(new TestDataSource()));
         }
 
         [Test]
@@ -89,6 +96,7 @@ namespace Jello.Tests
         {
             var additiveExpr = Parse<AdditiveExpression>("4 + 2 * 2");
             Assert.AreEqual(8, additiveExpr.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Number, additiveExpr.Type(new TestDataSource()));
         }
 
         [Test]
@@ -96,6 +104,7 @@ namespace Jello.Tests
         {
             var additiveExpr = Parse<MultiplicativeExpression>("(4 + 2) * 2");
             Assert.AreEqual("*", additiveExpr.Operator);
+            Assert.AreEqual(ValueType.Number, additiveExpr.Type(new TestDataSource()));
         }
     }
 }

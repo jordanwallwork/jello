@@ -18,9 +18,18 @@ namespace Jello.Tests
                 {"String", "abc"},
                 {"Bool", true}
             });
-            Assert.AreEqual(123, Parse<Identifier>("Num").GetValue(dataSource));
-            Assert.AreEqual("abc", Parse<Identifier>("String").GetValue(dataSource));
-            Assert.IsTrue((bool)Parse<Identifier>("Bool").GetValue(dataSource));
+
+            var num = Parse<Identifier>("Num");
+            Assert.AreEqual(123, num.GetValue(dataSource));
+            Assert.AreEqual(ValueType.Number, num.Type(dataSource));
+
+            var str = Parse<Identifier>("String");
+            Assert.AreEqual("abc", str.GetValue(dataSource));
+            Assert.AreEqual(ValueType.String, str.Type(dataSource));
+
+            var boole = Parse<Identifier>("Bool");
+            Assert.IsTrue((bool)boole.GetValue(dataSource));
+            Assert.AreEqual(ValueType.Bool, boole.Type(dataSource));
         }
     }
 }

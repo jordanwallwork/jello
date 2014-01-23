@@ -1,4 +1,6 @@
-﻿namespace Jello
+﻿using System.Collections.Generic;
+
+namespace Jello
 {
     public class Settings
     {
@@ -9,4 +11,6 @@
             DateParser = new StandardDateParser();
         }
     }
+
+
 }

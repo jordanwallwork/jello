@@ -1,4 +1,5 @@
 using Jello.DataSources;
+using Jello.Utils;
 
 namespace Jello.Nodes
 {
@@ -31,6 +32,11 @@ namespace Jello.Nodes
             if (Operator == ">=") return Evaluate((l, r) => (decimal?)l >= (decimal?)r, dataSource);
 
             return LHS.GetValue(dataSource);
+        }
+
+        public override ValueType Type(IDataSource dataSource)
+        {
+            return RHS == null ? LHS.Type(dataSource) : ValueType.Bool;
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Jello.DataSources;
 using Jello.Errors;
 using Jello.Utils;
@@ -156,6 +155,13 @@ namespace Jello.Nodes
             var singleChild = GetSingleChild();
             if (singleChild != null) return singleChild.GetValue(dataSource);
             throw new NotImplementedException();
+        }
+
+        public virtual ValueType Type(IDataSource dataSource)
+        {
+            var sc = GetSingleChild();
+            if (sc != null) return sc.Type(dataSource);
+            throw new Exception("Cannot get type information");
         }
     }
 }

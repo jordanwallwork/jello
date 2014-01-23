@@ -13,6 +13,7 @@ namespace Jello.Tests
             var expr = Parse<PrimaryExpression>("true");
             Assert.IsNotNull(expr.Inner);
             Assert.IsTrue((bool)expr.Inner.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, expr.Type(new TestDataSource()));
         }
 
         [Test]
@@ -21,6 +22,7 @@ namespace Jello.Tests
             var expr = Parse<PrimaryExpression>("(true)");
             Assert.IsNotNull(expr.Inner);
             Assert.IsTrue((bool)expr.Inner.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, expr.Type(new TestDataSource()));
         }
 
         [Test]

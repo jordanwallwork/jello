@@ -20,5 +20,7 @@ namespace Jello.Nodes
         {
             return Value;
         }
+
+        public override ValueType Type(IDataSource dataSource) { return ValueType.Number; }
     }
 }

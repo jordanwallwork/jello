@@ -14,6 +14,7 @@ namespace Jello.Tests
         {
             var b = Parse<Bool>("true");
             Assert.IsTrue(b.Value);
+            Assert.AreEqual(ValueType.Bool, b.Type(new TestDataSource()));
         }
 
         [Test]
@@ -21,6 +22,7 @@ namespace Jello.Tests
         {
             var s = Parse<String>("\"this is a string\"");
             Assert.AreEqual("this is a string", s.Value);
+            Assert.AreEqual(ValueType.String, s.Type(new TestDataSource()));
         }
 
         [Test]
@@ -28,6 +30,7 @@ namespace Jello.Tests
         {
             var i = Parse<Number>("1.23");
             Assert.AreEqual(1.23, i.Value);
+            Assert.AreEqual(ValueType.Number, i.Type(new TestDataSource()));
         }
 
         [Test]
@@ -35,6 +38,7 @@ namespace Jello.Tests
         {
             var b = Parse<Term>("true");
             Assert.IsTrue((bool)b.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, b.Type(new TestDataSource()));
         }
 
         [Test]
@@ -42,6 +46,7 @@ namespace Jello.Tests
         {
             var b = Parse<Term>("\"string\"");
             Assert.AreEqual("string", b.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.String, b.Type(new TestDataSource()));
         }
 
         [Test]
@@ -49,6 +54,7 @@ namespace Jello.Tests
         {
             var d = Parse<Term>("'1989-09-29'");
             Assert.AreEqual(new DateTime(1989, 09, 29), d.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Date, d.Type(new TestDataSource()));
         }
 
         [Test]

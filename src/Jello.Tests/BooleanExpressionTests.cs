@@ -17,6 +17,7 @@ namespace Jello.Tests
             Assert.AreEqual(5, boolean.RHS.GetValue(new TestDataSource()));
 
             Assert.IsTrue((bool)boolean.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, boolean.Type(new TestDataSource()));
         }
 
         [Test]
@@ -28,6 +29,7 @@ namespace Jello.Tests
             Assert.AreEqual(2, boolean.RHS.GetValue(new TestDataSource()));
 
             Assert.IsTrue((bool)boolean.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, boolean.Type(new TestDataSource()));
         }
 
         [Test]
@@ -39,6 +41,7 @@ namespace Jello.Tests
             Assert.IsFalse((bool)boolean.RHS.GetValue(new TestDataSource()));
 
             Assert.IsTrue((bool)boolean.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, boolean.Type(new TestDataSource()));
         }
 
         [Test]
@@ -49,6 +52,7 @@ namespace Jello.Tests
             Assert.AreEqual("<", boolean.Operator);
             Assert.AreEqual(12, boolean.RHS.GetValue(new TestDataSource()));
             Assert.IsTrue((bool)boolean.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, boolean.Type(new TestDataSource()));
         }
 
         [Test]
@@ -60,6 +64,7 @@ namespace Jello.Tests
             Assert.AreEqual("<", boolean.Operator);
             Assert.AreEqual(new DateTime(2012, 1, 1), boolean.RHS.GetValue(new TestDataSource()));
             Assert.IsTrue((bool)boolean.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, boolean.Type(new TestDataSource()));
         }
     }
 }
