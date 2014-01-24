@@ -29,6 +29,14 @@ namespace Jello.Tests
         }
 
         [Test]
+        public void StringEquality()
+        {
+            var boolean = Parse<Expression>("\"A\" == \"A\"");
+            Assert.IsTrue((bool)boolean.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, boolean.Type(new TestDataSource()));
+        }
+
+        [Test]
         public void NumericInequality()
         {
             var boolean = Parse<BooleanExpression>("1 != 2");

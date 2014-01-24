@@ -31,5 +31,16 @@ namespace Jello.Tests
             Assert.IsTrue((bool)boole.GetValue(dataSource));
             Assert.AreEqual(ValueType.Bool, boole.Type(dataSource));
         }
+
+        [Test]
+        public void StringEquality()
+        {
+            var dataSource = new TestDataSource(new Dictionary<string, object>
+            {
+                {"String", "abc"}
+            });
+            var strEq = Parse<Expression>("String == \"abc\"");
+            Assert.IsTrue((bool)strEq.GetValue(dataSource));
+        }
     }
 }

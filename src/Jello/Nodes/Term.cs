@@ -9,13 +9,13 @@ namespace Jello.Nodes
         protected override Term ParseNode()
         {
             INode node;
-            if (AcceptNode<Bool>(out node) || AcceptNode<String>(out node) ||
+            if (AcceptNode<Identifier>(out node) || AcceptNode<Bool>(out node) || AcceptNode<String>(out node) ||
                 AcceptNode<Number>(out node) || AcceptNode<Date>(out node))
             {
                 Node = node;
                 return this;
             }
-            return NoMatches("bool", "string", "number", "date");
+            return NoMatches("identifier", "bool", "string", "number", "date");
         }
 
         public override INode GetSingleChild()

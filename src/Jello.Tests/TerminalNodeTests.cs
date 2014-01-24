@@ -64,7 +64,7 @@ namespace Jello.Tests
             var error = expr.Errors[0];
             Assert.AreEqual(1, error.LineNo);
             Assert.AreEqual(1, error.Col);
-            Assert.AreEqual("Expected bool, string, number or date", error.Message);
+            Assert.AreEqual("Expected identifier, bool, string, number or date", error.Message);
         }
     }
 }
