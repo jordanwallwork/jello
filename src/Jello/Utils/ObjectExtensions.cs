@@ -50,5 +50,14 @@ namespace Jello.Utils
                 || value is double
                 || value is decimal;
         }
+
+        public static ValueType? GetValueType(this object obj)
+        {
+            if (obj is bool) return ValueType.Bool;
+            if (obj.IsNumber()) return ValueType.Number;
+            if (obj is string) return ValueType.String;
+            if (obj is DateTime) return ValueType.Date;
+            return null;
+        }
     }
 }

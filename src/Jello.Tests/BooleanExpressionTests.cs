@@ -21,6 +21,14 @@ namespace Jello.Tests
         }
 
         [Test]
+        public void NumericEquality_NodeTypeNotSpecified()
+        {
+            var boolean = Parse<Expression>("5 == 5");
+            Assert.IsTrue((bool)boolean.GetValue(new TestDataSource()));
+            Assert.AreEqual(ValueType.Bool, boolean.Type(new TestDataSource()));
+        }
+
+        [Test]
         public void NumericInequality()
         {
             var boolean = Parse<BooleanExpression>("1 != 2");

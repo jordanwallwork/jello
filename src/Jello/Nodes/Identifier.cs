@@ -27,11 +27,8 @@ namespace Jello.Nodes
 
         public override ValueType Type(IDataSource dataSource)
         {
-            var val = GetValue(dataSource);
-            if (val is bool) return ValueType.Bool;
-            if (val.IsNumber()) return ValueType.Number;
-            if (val is string) return ValueType.String;
-            if (val is DateTime) return ValueType.Date;
+            var type = GetValue(dataSource).GetValueType();
+            if (type.HasValue) return type.Value;
             throw new Exception("Unrecognized type");
         }
     }

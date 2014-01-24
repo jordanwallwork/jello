@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Linq;
 using Jello.Nodes;
 
 namespace Jello
@@ -19,10 +16,10 @@ namespace Jello
         {
             var lexer = new Lexer(input);
             if (lexer.Errors.Any()) return new ParseResult(lexer.Errors);
-            var node = new PrimaryExpression();
+            var node = new Expression();
             node.Parse(this, lexer);
             if (node.Errors.Any()) return new ParseResult(node.Errors);
-            return new ParseResult(node);
+            return new ParseResult(node.GetSingleChild() ?? node);
         }
     }
 }

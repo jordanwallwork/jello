@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Jello.DataSources;
 using Jello.Errors;
 using Jello.Nodes;
+using Jello.Utils;
 
 namespace Jello
 {
@@ -26,6 +28,14 @@ namespace Jello
         public object Execute(IDataSource dataSource)
         {
             return _root.GetValue(dataSource);
+        }
+
+        public bool? ExecuteBool(IDataSource dataSource)
+        {
+            var val = _root.GetValue(dataSource);
+            var valType = val.GetValueType();
+            if (valType != ValueType.Bool) throw new Exception("Return value is not boolean");
+            return val.AsBool();
         }
     }
 }
